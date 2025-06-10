@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apps-low-priority
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-low
+  template:
+    metadata:
+      labels:
+        app: app-low
+    spec:
+      priorityClassName: "low"
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: app
+        image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 500m
+            memory: 500Mi

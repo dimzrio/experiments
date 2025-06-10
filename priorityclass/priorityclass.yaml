@@ -1,0 +1,26 @@
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: low
+value: -10
+preemptionPolicy: Never
+globalDefault: false
+description: "The low priority workloads"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: default
+value: 0
+preemptionPolicy: PreemptLowerPriority
+globalDefault: false
+description: "The default priority class for workloads"
+---
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high
+value: 10
+preemptionPolicy: PreemptLowerPriority
+globalDefault: false
+description: "The high priority workloads"
